@@ -35,7 +35,7 @@ public class KeyWordDisciplineScientifiqueErcRestChercheur {
         keyWordDisciplineScientifiqueErc = keyWordDisciplineScientifiqueErcService.update(keyWordDisciplineScientifiqueErc);
         return keyWordDisciplineScientifiqueErcConverter.toVo(keyWordDisciplineScientifiqueErc);
     }
-    
+
     @ApiOperation("Finds a list of all keyWordDisciplineScientifiqueErcs")
     @GetMapping("/")
     public List<KeyWordDisciplineScientifiqueErcVo> findAll() {

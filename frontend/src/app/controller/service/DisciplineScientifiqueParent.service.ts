@@ -32,7 +32,7 @@ export class DisciplineScientifiqueParentService {
 
     // methods
     public archiver(disciplineScientifiqueParent: DisciplineScientifiqueParentVo): Observable<DisciplineScientifiqueParentVo> {
-        return this.http.put<DisciplineScientifiqueParentVo>(this.API + 'archiver/' ,disciplineScientifiqueParent);
+        return this.http.put<DisciplineScientifiqueParentVo>(this.API + 'archiver/' , disciplineScientifiqueParent);
     }
     public desarchiver(disciplineScientifiqueParent: DisciplineScientifiqueParentVo): Observable<DisciplineScientifiqueParentVo> {
     return this.http.put<DisciplineScientifiqueParentVo>(this.API + 'desarchiver/' ,disciplineScientifiqueParent);

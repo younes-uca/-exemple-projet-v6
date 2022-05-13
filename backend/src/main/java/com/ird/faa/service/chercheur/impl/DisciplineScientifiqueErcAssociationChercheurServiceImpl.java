@@ -30,6 +30,7 @@ public class DisciplineScientifiqueErcAssociationChercheurServiceImpl extends Ab
         List<DisciplineScientifiqueErcAssociation> disciplineScientifiqueErcAssociationList = findByDisciplineScientifiqueId(id);
         disciplineScientifiqueErcAssociationList.forEach(e-> {
             String str = keyWordDisciplineScientifiqueErcChercheurService.generateDisciplineScientifiqueErcLibelle(e.getDisciplineScientifiqueErc().getId());
+            if(!concat.toString().contains(str))
             concat.append(str+",");
         });
         String result = concat.substring(0,concat.length()-1) +")";
@@ -44,7 +45,11 @@ public class DisciplineScientifiqueErcAssociationChercheurServiceImpl extends Ab
         List<DisciplineScientifiqueErcAssociation> disciplineScientifiqueErcAssociationList = findByDisciplineScientifiqueId(id);
         List<DisciplineScientifiqueErc> disciplineScientifiqueErcList = new ArrayList<>();
         disciplineScientifiqueErcAssociationList.forEach(e -> disciplineScientifiqueErcList.add(e.getDisciplineScientifiqueErc()));
-        disciplineScientifiqueErcList.forEach(e -> concat.append(e.getLibelleEng()).append(","));
+        disciplineScientifiqueErcList.forEach(e -> {
+             String str = e.getLibelleEng();
+            if(!concat.toString().contains(str))
+                concat.append(e.getLibelleEng()).append(",");
+        });
         return disciplineScientifique.getLibelleEng() + "(" + concat.substring(0, concat.length() - 1) + ")";
     }
 
