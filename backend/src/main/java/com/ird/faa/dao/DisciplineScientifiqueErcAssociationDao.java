@@ -12,8 +12,6 @@ public interface DisciplineScientifiqueErcAssociationDao extends JpaRepository<D
 
 
 
-
-
     List<DisciplineScientifiqueErcAssociation> findByDisciplineScientifiqueErcCode(String code);
     int deleteByDisciplineScientifiqueErcCode(String code);
 

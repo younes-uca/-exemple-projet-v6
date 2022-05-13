@@ -1,5 +1,6 @@
 package com.ird.faa.dao;
 
+import com.ird.faa.bean.KeyWord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -9,9 +10,6 @@ import com.ird.faa.bean.KeyWordDisciplineScientifiqueErc;
 
 @Repository
 public interface KeyWordDisciplineScientifiqueErcDao extends JpaRepository<KeyWordDisciplineScientifiqueErc,Long> {
-
-
-
 
 
     List<KeyWordDisciplineScientifiqueErc> findByKeyWordCode(String code);

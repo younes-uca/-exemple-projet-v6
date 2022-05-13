@@ -21,6 +21,7 @@ private Long id;
 
     @ManyToOne
     private Distinction distinction ;
+
     @ManyToOne
     private DisciplineScientifique disciplineScientifique ;
 

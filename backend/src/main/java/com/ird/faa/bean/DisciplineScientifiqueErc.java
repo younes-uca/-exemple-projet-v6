@@ -40,6 +40,9 @@ public class DisciplineScientifiqueErc implements Archivable {
     @Column(columnDefinition = "boolean default false")
     private Boolean visible = false;
 
+    // erc(key,key2,key3)
+    private String keywordLibelle;
+
     @ManyToOne
     private DisciplineScientifiqueErcParent disciplineScientifiqueErcParent;
 
@@ -161,6 +164,14 @@ public class DisciplineScientifiqueErc implements Archivable {
         if (o == null || getClass() != o.getClass()) return false;
         DisciplineScientifiqueErc disciplineScientifiqueErc = (DisciplineScientifiqueErc) o;
         return id != null && id.equals(disciplineScientifiqueErc.id);
+    }
+
+    public String getKeywordLibelle() {
+        return keywordLibelle;
+    }
+
+    public void setKeywordLibelle(String keywordLibelle) {
+        this.keywordLibelle = keywordLibelle;
     }
 
     @Override

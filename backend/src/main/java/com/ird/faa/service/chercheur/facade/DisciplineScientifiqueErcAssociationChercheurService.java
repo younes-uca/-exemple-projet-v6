@@ -8,7 +8,10 @@ import com.ird.faa.service.core.facade.AbstractService;
 public interface DisciplineScientifiqueErcAssociationChercheurService extends AbstractService<DisciplineScientifiqueErcAssociation,Long,DisciplineScientifiqueErcAssociationVo>{
 
 
+    String generateGlobalLibellFordisciplineScientifique(Long id);
 
+
+    String generateDisciplineScientifiqueLibelle(Long id);
 
 
 /**

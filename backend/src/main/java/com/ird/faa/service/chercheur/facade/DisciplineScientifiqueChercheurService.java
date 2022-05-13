@@ -8,6 +8,7 @@ import com.ird.faa.service.core.facade.AbstractService;
 public interface DisciplineScientifiqueChercheurService extends AbstractService<DisciplineScientifique,Long,DisciplineScientifiqueVo>{
 
 
+    List<String> getAllLibelle();
 
     /**
     * find DisciplineScientifique from database by code (reference)

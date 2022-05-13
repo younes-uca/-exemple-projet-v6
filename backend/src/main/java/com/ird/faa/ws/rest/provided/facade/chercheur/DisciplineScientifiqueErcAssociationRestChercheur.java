@@ -31,7 +31,49 @@ private DisciplineScientifiqueErcAssociationChercheurService disciplineScientifi
 private DisciplineScientifiqueErcAssociationConverter disciplineScientifiqueErcAssociationConverter;
 
 
-            @ApiOperation("Updates the specified  disciplineScientifiqueErcAssociation")
+    @ApiOperation("find libelle For discipline scientifique")
+    @GetMapping("/libelle/{id}")
+    public String generateGlobalLibellFordisciplineScientifique(@PathVariable Long id) {
+        return disciplineScientifiqueErcAssociationService.generateGlobalLibellFordisciplineScientifique(id);
+    }
+
+
+
+    @ApiOperation("show libelle for discipline scientifique")
+    @GetMapping("/key-libelle/id/{id}")
+    public String generateDisciplineScientifiqueLibelle(@PathVariable Long id) {
+        return disciplineScientifiqueErcAssociationService.generateDisciplineScientifiqueLibelle(id);
+    }
+
+    public List<List<DisciplineScientifiqueErcAssociation>> getToBeSavedAndToBeDeleted(List<DisciplineScientifiqueErcAssociation> oldList, List<DisciplineScientifiqueErcAssociation> newList) {
+        return disciplineScientifiqueErcAssociationService.getToBeSavedAndToBeDeleted(oldList, newList);
+    }
+
+    public DisciplineScientifiqueErcAssociation save(DisciplineScientifiqueErcAssociation entity) {
+        return disciplineScientifiqueErcAssociationService.save(entity);
+    }
+
+    public List<DisciplineScientifiqueErcAssociation> save(List<DisciplineScientifiqueErcAssociation> list) {
+        return disciplineScientifiqueErcAssociationService.save(list);
+    }
+
+    public DisciplineScientifiqueErcAssociation update(DisciplineScientifiqueErcAssociation T) {
+        return disciplineScientifiqueErcAssociationService.update(T);
+    }
+
+    public int delete(DisciplineScientifiqueErcAssociation T) {
+        return disciplineScientifiqueErcAssociationService.delete(T);
+    }
+
+    public void delete(List<DisciplineScientifiqueErcAssociation> list) {
+        disciplineScientifiqueErcAssociationService.delete(list);
+    }
+
+    public void update(List<DisciplineScientifiqueErcAssociation> list) {
+        disciplineScientifiqueErcAssociationService.update(list);
+    }
+
+    @ApiOperation("Updates the specified  disciplineScientifiqueErcAssociation")
             @PutMapping("/")
             public  DisciplineScientifiqueErcAssociationVo update(@RequestBody  DisciplineScientifiqueErcAssociationVo  disciplineScientifiqueErcAssociationVo){
             DisciplineScientifiqueErcAssociation disciplineScientifiqueErcAssociation = disciplineScientifiqueErcAssociationConverter.toItem(disciplineScientifiqueErcAssociationVo);
