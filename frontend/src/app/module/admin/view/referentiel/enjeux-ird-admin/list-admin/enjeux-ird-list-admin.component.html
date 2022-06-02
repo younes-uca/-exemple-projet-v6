@@ -82,7 +82,7 @@
             </p-toolbar>
 
 
-            <p-table #dt [value]="enjeuxIrds" [columns]="cols" [rows]="4" [paginator]="true"
+            <p-table #dt [value]="enjeuxIrds" [columns]="cols" [rows]="10" [paginator]="true"
                     [globalFilterFields]="['libelle', 'code', 'archive', 'dateArchivage', 'dateCreation']" [(selection)]="selectedEnjeuxIrd"
                     [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
                                       currentPageReportTemplate="Les éléments de {first} à {last} sur {totalRecords}"
@@ -176,7 +176,7 @@
                             
 
                             
-                                <td>{{enjeuxIrd.dateArchivage | date:'dd-M-yyyy' }}</td>
+                                <td>{{enjeuxIrd.dateArchivage | date:'dd-M-yyyy hh:mm:ss' }}</td>
                             
 
                             

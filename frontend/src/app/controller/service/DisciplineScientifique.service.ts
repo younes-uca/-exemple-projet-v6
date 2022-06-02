@@ -25,6 +25,7 @@ export class DisciplineScientifiqueService {
      private _disciplineScientifiques: Array<DisciplineScientifiqueVo> ;
      private _selectedDisciplineScientifique: DisciplineScientifiqueVo;
      private _disciplineScientifiqueSelections: Array<DisciplineScientifiqueVo>;
+     private _disciplineScientifiquesLibelles: Array<string>;
      private _createDisciplineScientifiqueDialog: boolean;
      private _editDisciplineScientifiqueDialog: boolean;
      private _viewDisciplineScientifiqueDialog: boolean;
@@ -43,6 +44,12 @@ export class DisciplineScientifiqueService {
     public findAll(){
      return this.http.get<Array<DisciplineScientifiqueVo>>(this.API);
     }
+
+    /*          New         */
+    public findAllLibelle(){
+     return this.http.get<Array<string>>(this.API + 'libelle');
+    }
+    /*                      */
 
     public save(): Observable<DisciplineScientifiqueVo> {
            return this.http.post<DisciplineScientifiqueVo>(this.API, {...this.selectedDisciplineScientifique,dateCreation: moment(this.selectedDisciplineScientifique.dateCreation).format("YYYY-MM-DD")});
@@ -138,4 +145,15 @@ return this._disciplineScientifiques;
         this._searchDisciplineScientifique = value;
        }
 
+    /*          New         */
+    get disciplineScientifiquesLibelles(): Array<string> {
+        if(this._disciplineScientifiquesLibelles == null){
+            this._disciplineScientifiquesLibelles = new Array<string>();
+        }
+        return this._disciplineScientifiquesLibelles;
+    }
+
+    set disciplineScientifiquesLibelles(value: Array<string>) {
+        this._disciplineScientifiquesLibelles = value;
+    }
 }

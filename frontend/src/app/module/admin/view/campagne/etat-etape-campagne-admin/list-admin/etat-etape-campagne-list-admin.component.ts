@@ -1,20 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {EtatEtapeCampagneService} from 'src/app/controller/service/EtatEtapeCampagne.service';
 import {EtatEtapeCampagneVo} from 'src/app/controller/model/EtatEtapeCampagne.model';
-import * as moment from 'moment';
 import {Router} from '@angular/router';
-import { environment } from 'src/environments/environment';
-import jsPDF from 'jspdf';
-import autoTable, { RowInput } from 'jspdf-autotable';
-import { saveAs } from 'file-saver';
-import { RoleService } from 'src/app/controller/service/role.service';
+import {environment} from 'src/environments/environment';
+import {RoleService} from 'src/app/controller/service/role.service';
 import {DatePipe} from '@angular/common';
 
 
-
-import { MessageService, ConfirmationService, MenuItem } from 'primeng/api';
+import {ConfirmationService, MenuItem, MessageService} from 'primeng/api';
 import {AuthService} from 'src/app/controller/service/Auth.service';
-import { ExportService } from 'src/app/controller/service/Export.service';
+import {ExportService} from 'src/app/controller/service/Export.service';
 
 @Component({
   selector: 'app-etat-etape-campagne-list-admin',
@@ -35,25 +30,33 @@ export class EtatEtapeCampagneListAdminComponent implements OnInit {
 ) { }
 
     ngOnInit() : void {
-      this.loadEtatEtapeCampagnes();
-      this.initExport();
-      this.initCol();
+
+        if(!this.searchAction) {
+            this.loadEtatEtapeCampagnes();
+            this.searchAction = true;
+            this.sortByLibelle();
+            this.sortByOrdre();
+            this.sortByCode();
+            this.initCol();
+        }
+        this.initExport();
     }
-    
+
     // methods
-      public async loadEtatEtapeCampagnes(){
+    public async loadEtatEtapeCampagnes() {
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('EtatEtapeCampagne', 'list');
-        isPermistted ? this.etatEtapeCampagneService.findAll().subscribe(etatEtapeCampagnes => this.etatEtapeCampagnes = etatEtapeCampagnes,error=>console.log(error))
-        : this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'});
+        isPermistted ? this.etatEtapeCampagneService.findAll().subscribe(etatEtapeCampagnes => this.etatEtapeCampagnes = etatEtapeCampagnes, error => console.log(error))
+            : this.messageService.add({severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'});
+
     }
 
 
   public searchRequest(){
         this.etatEtapeCampagneService.findByCriteria(this.searchEtatEtapeCampagne).subscribe(etatEtapeCampagnes=>{
-            
+
             this.etatEtapeCampagnes = etatEtapeCampagnes;
-           // this.searchEtatEtapeCampagne = new EtatEtapeCampagneVo();
+           this.searchEtatEtapeCampagne = new EtatEtapeCampagneVo();
         },error=>console.log(error));
     }
 
@@ -64,7 +67,7 @@ export class EtatEtapeCampagneListAdminComponent implements OnInit {
                             {field: 'ordre', header: 'Ordre'},
         ];
     }
-    
+
     public async editEtatEtapeCampagne(etatEtapeCampagne: EtatEtapeCampagneVo){
         const isPermistted = await this.roleService.isPermitted('EtatEtapeCampagne', 'edit');
          if(isPermistted){
@@ -77,9 +80,9 @@ export class EtatEtapeCampagneListAdminComponent implements OnInit {
                 severity: 'error', summary: 'Erreur', detail: 'Probléme de permission'
             });
          }
-       
+
     }
-    
+
 
 
    public async viewEtatEtapeCampagne(etatEtapeCampagne: EtatEtapeCampagneVo){
@@ -94,9 +97,9 @@ export class EtatEtapeCampagneListAdminComponent implements OnInit {
                 severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'
             });
         }
-        
+
     }
-    
+
     public async openCreateEtatEtapeCampagne(pojo: string) {
         const isPermistted = await this.roleService.isPermitted(pojo, 'add');
         if(isPermistted){
@@ -107,7 +110,7 @@ export class EtatEtapeCampagneListAdminComponent implements OnInit {
                 severity: 'error', summary: 'erreur', detail: 'problème d\'autorisation'
             });
         }
-       
+
     }
 
 
@@ -202,8 +205,8 @@ public async duplicateEtatEtapeCampagne(etatEtapeCampagne: EtatEtapeCampagneVo) 
     set etatEtapeCampagneSelections(value: Array<EtatEtapeCampagneVo>) {
         this.etatEtapeCampagneService.etatEtapeCampagneSelections = value;
        }
-   
-     
+
+
 
 
     get selectedEtatEtapeCampagne() : EtatEtapeCampagneVo {
@@ -212,14 +215,14 @@ public async duplicateEtatEtapeCampagne(etatEtapeCampagne: EtatEtapeCampagneVo) 
     set selectedEtatEtapeCampagne(value: EtatEtapeCampagneVo) {
         this.etatEtapeCampagneService.selectedEtatEtapeCampagne = value;
        }
-    
+
     get createEtatEtapeCampagneDialog() :boolean {
            return this.etatEtapeCampagneService.createEtatEtapeCampagneDialog;
        }
     set createEtatEtapeCampagneDialog(value: boolean) {
         this.etatEtapeCampagneService.createEtatEtapeCampagneDialog= value;
        }
-    
+
     get editEtatEtapeCampagneDialog() :boolean {
            return this.etatEtapeCampagneService.editEtatEtapeCampagneDialog;
        }
@@ -232,7 +235,7 @@ public async duplicateEtatEtapeCampagne(etatEtapeCampagne: EtatEtapeCampagneVo) 
     set viewEtatEtapeCampagneDialog(value: boolean) {
         this.etatEtapeCampagneService.viewEtatEtapeCampagneDialog = value;
        }
-       
+
      get searchEtatEtapeCampagne() : EtatEtapeCampagneVo {
         return this.etatEtapeCampagneService.searchEtatEtapeCampagne;
        }
@@ -244,6 +247,63 @@ public async duplicateEtatEtapeCampagne(etatEtapeCampagne: EtatEtapeCampagneVo) 
     get dateFormat(){
             return environment.dateFormatList;
     }
+
+/*   For search   */
+    get searchAction(): boolean{
+       return  this.etatEtapeCampagneService.searchAction;
+    }
+    set searchAction(value: boolean){
+        this.etatEtapeCampagneService.searchAction = value;
+    }
+
+    /*   For sort   */
+
+    get sortLibelle(): number {
+       return this.etatEtapeCampagneService.sortByLibelle;
+    }
+
+    get sortCode(): number {
+       return this.etatEtapeCampagneService.sortByCode;
+    }
+
+    get sortOrdre(): number {
+       return this.etatEtapeCampagneService.sortByOrdre;
+    }
+
+
+
+
+     sortByLibelle() {
+        if(this.sortLibelle === 1) {
+            this.etatEtapeCampagneService.sortByLibelle = -1;
+        }
+        else{
+            this.etatEtapeCampagneService.sortByLibelle = 1;
+        }
+         console.log('sort Libelle : '+this.sortLibelle);
+     }
+
+    sortByCode() {
+        if(this.sortCode === 1) {
+            this.etatEtapeCampagneService.sortByCode = -1;
+        }
+        else{
+            this.etatEtapeCampagneService.sortByCode = 1;
+        }
+        console.log('sort Code : '+this.sortCode);
+    }
+
+    sortByOrdre() {
+        if(this.sortOrdre === 1) {
+            this.etatEtapeCampagneService.sortByOrdre = -1;
+        }
+        else{
+            this.etatEtapeCampagneService.sortByOrdre = 1;
+        }
+        console.log('sort Ordre : '+this.sortOrdre);
+    }
+
+
 
 
 }

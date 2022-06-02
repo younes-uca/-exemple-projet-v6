@@ -37,6 +37,9 @@ import {TabViewModule} from 'primeng/tabview';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { MessageModule } from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
+import {ReferentielChercheurModule} from '../referentiel/referentiel-chercheur.module';
+import {CampagneChercheurModule} from '../campagne/campagne-chercheur.module';
+import {FormulaireChercheurModule} from '../formulaire/formulaire-chercheur.module';
 
 
 @NgModule({
@@ -53,33 +56,36 @@ import {MessagesModule} from 'primeng/messages';
     DistinctionDisciplineScientifiqueEditChercheurComponent,
     DistinctionDisciplineScientifiqueChercheurComponent,
   ],
-  imports: [
-    CommonModule,
-    ToastModule,
-    ToolbarModule,
-    TableModule,
-    ConfirmDialogModule,
-    DialogModule,
-    PasswordModule,
-    InputTextModule,
-    ButtonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    SplitButtonModule,
-    BrowserAnimationsModule,
-    DropdownModule,
-    TabViewModule,
-    InputSwitchModule,
-    InputTextareaModule,
-    CalendarModule,
-    PanelModule,
-    MessageModule,
-    MessagesModule,
-    InputNumberModule,
-    BadgeModule,
-    MultiSelectModule,
-  ],
+    imports: [
+        CommonModule,
+        ToastModule,
+        ToolbarModule,
+        TableModule,
+        ConfirmDialogModule,
+        DialogModule,
+        PasswordModule,
+        InputTextModule,
+        ButtonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        SplitButtonModule,
+        BrowserAnimationsModule,
+        DropdownModule,
+        TabViewModule,
+        InputSwitchModule,
+        InputTextareaModule,
+        CalendarModule,
+        PanelModule,
+        MessageModule,
+        MessagesModule,
+        InputNumberModule,
+        BadgeModule,
+        MultiSelectModule,
+        ReferentielChercheurModule,
+        CampagneChercheurModule,
+        FormulaireChercheurModule,
+    ],
   exports: [
   DistinctionCreateChercheurComponent,
   DistinctionListChercheurComponent,

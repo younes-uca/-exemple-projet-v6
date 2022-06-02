@@ -54,11 +54,16 @@
             </p-toolbar>
 
 
-            <p-table #dt [value]="etatEtapeCampagnes" [columns]="cols" [rows]="4" [paginator]="true"
+            <p-table #dt [value]="etatEtapeCampagnes" [columns]="cols" [rows]="10" [paginator]="true"
                     [globalFilterFields]="['libelle', 'code', 'ordre']" [(selection)]="selectedEtatEtapeCampagne"
                     [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
                                       currentPageReportTemplate="Les éléments de {first} à {last} sur {totalRecords}"
-                    [showCurrentPageReport]="true">
+                                [showCurrentPageReport]="true"
+                     [lazy]="false" [lazyLoadOnInit]="false"
+                     [multiSortMeta]="[{field: 'libelle', order: sortLibelle}, {field: 'code', order: sortCode},{field: 'ordre', order: sortOrdre}]"
+            >
+
+
                 <ng-template pTemplate="caption">
                     <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
                         <h5 class="p-m-0">Liste des etat etape campagnes</h5>
@@ -75,17 +80,17 @@
                         </th>
 
                                 
-                                <th pSortableColumn="libelle">
+                                <th pSortableColumn="libelle" (click)="sortByLibelle()">
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         <span>Libelle</span>
-                                        <p-sortIcon field="libelle"></p-sortIcon>
+                                        <p-sortIcon field="libelle" ></p-sortIcon>
                                     </div>
                                 </th>
                                 
 
 
                                 
-                                <th pSortableColumn="code">
+                                <th pSortableColumn="code" (click)="sortByCode()">
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         <span>Code</span>
                                         <p-sortIcon field="code"></p-sortIcon>
@@ -94,8 +99,7 @@
                                 
 
 
-                                
-                                <th pSortableColumn="ordre">
+                                <th pSortableColumn="ordre" (click)="sortByOrdre()">
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         <span>Ordre</span>
                                         <p-sortIcon field="ordre"></p-sortIcon>

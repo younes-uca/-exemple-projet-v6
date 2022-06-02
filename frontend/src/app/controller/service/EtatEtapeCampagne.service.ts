@@ -30,6 +30,19 @@ export class EtatEtapeCampagneService {
      private role$: Observable<string>;
      private _searchEtatEtapeCampagne: EtatEtapeCampagneVo ;
 
+
+     private _searchAction: boolean;
+
+
+
+     private _name: string;
+
+     /*   for Sorting   */
+     private _sortByLibelle: number;
+     private _sortByCode: number;
+     private _sortByOrdre: number;
+
+
     // methods
 
     public findAll(){
@@ -130,4 +143,61 @@ return this._etatEtapeCampagnes;
         this._searchEtatEtapeCampagne = value;
        }
 
+
+    get searchAction(): boolean {
+        if(this._searchAction === undefined){
+            this._searchAction = false;
+        }
+        return this._searchAction;
+    }
+
+    set searchAction(value: boolean) {
+        this._searchAction = value;
+    }
+
+
+    // get name(): string {
+    //     if(this._name == null){
+    //         this._name = 'lebelle';
+    //     }
+    //     return this._name;
+    // }
+    //
+    // set name(value: string) {
+    //     this._name = value;
+    // }
+
+
+    get sortByLibelle(): number {
+        if(this._sortByLibelle === null){
+            this._sortByLibelle = 1;
+        }
+        return this._sortByLibelle;
+    }
+
+    set sortByLibelle(value: number) {
+        this._sortByLibelle = value;
+    }
+
+    get sortByCode(): number {
+        if(this._sortByCode === null) {
+            this._sortByCode = 1;
+        }
+        return this._sortByCode;
+    }
+
+    set sortByCode(value: number) {
+        this._sortByCode = value;
+    }
+
+    get sortByOrdre(): number {
+        if(this._sortByOrdre === null) {
+            this._sortByOrdre = 1;
+        }
+        return this._sortByOrdre;
+    }
+
+    set sortByOrdre(value: number) {
+        this._sortByOrdre = value;
+    }
 }

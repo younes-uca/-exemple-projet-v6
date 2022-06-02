@@ -30,7 +30,14 @@ private Long id;
 public EtatEtapeCampagne(){
 super();
 }
-public EtatEtapeCampagne(String libelle,String code){
+
+    public EtatEtapeCampagne(String libelle, String code, Integer ordre) {
+        this.libelle = libelle;
+        this.code = code;
+        this.ordre = ordre;
+    }
+
+    public EtatEtapeCampagne(String libelle, String code){
 this.libelle=libelle;
 this.code=code;
 }

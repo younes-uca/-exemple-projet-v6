@@ -36,7 +36,6 @@ import { RegisterAdminComponent } from './register-admin/register-admin.componen
                               ]
                         },
                         {
-
                             path: 'distinction',
                             loadChildren: './view/distinction/distinction-admin-routing.module#DistinctionAdminRoutingModule',
                             canActivate: [AuthGuard],

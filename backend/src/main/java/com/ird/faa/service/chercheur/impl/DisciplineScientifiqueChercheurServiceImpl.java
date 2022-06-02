@@ -29,24 +29,28 @@ public class DisciplineScientifiqueChercheurServiceImpl extends AbstractServiceI
 
 
     /* Get All libelle */
-
     @Override
     public List<String> getAllLibelle() {
-        List<DisciplineScientifique> disciplineScientifiques = findAll();
+        List<DisciplineScientifique> disciplineScientifiques = disciplineScientifiqueDao.findAll();
         List<String> libelles = new ArrayList<>();
-        disciplineScientifiques.forEach(e -> {
-            libelles.add(e.getDisciplineScientifiqueErcLibelle());
-        });
+        disciplineScientifiques.forEach(e -> libelles.add(e.getDisciplineScientifiqueErcLibelle()));
         return libelles;
     }
+//    @Override
+//    public List<DisciplineScientifique> findAll() {
+//        List<DisciplineScientifique> result = new ArrayList();
+//        result.addAll(findAllNonArchive());
+//        result.addAll(findAllByOwner());
+//        return result;
+//    }
+//
 
+    /*  Temporaire  */
     @Override
     public List<DisciplineScientifique> findAll() {
-        List<DisciplineScientifique> result = new ArrayList();
-        result.addAll(findAllNonArchive());
-        result.addAll(findAllByOwner());
-        return result;
+        return disciplineScientifiqueDao.findAll();
     }
+    /*                */
 
     @Override
     public List<DisciplineScientifique> findByDisciplineScientifiqueParentCode(String code) {
@@ -179,6 +183,7 @@ public class DisciplineScientifiqueChercheurServiceImpl extends AbstractServiceI
             saveDisciplineScientifiqueErcAssociations(savedDisciplineScientifique, disciplineScientifique.getDisciplineScientifiqueErcAssociations());
             result = savedDisciplineScientifique;
         }
+
         /* set disipline scientifique libelle and update */
         update(disciplineScientifique);
 
@@ -282,7 +287,9 @@ public class DisciplineScientifiqueChercheurServiceImpl extends AbstractServiceI
 
 
     public List<DisciplineScientifique> findAllNonArchive() {
-        String query = "SELECT o FROM DisciplineScientifique o  WHERE o.archive != true AND o.visible = true";
+        // l'Attribut Visible does not exist on Discipline Scientifique
+//        String query = "SELECT o FROM DisciplineScientifique o  WHERE o.archive != true AND o.visible = true";
+        String query = "SELECT o FROM DisciplineScientifique o  WHERE o.archive != true";
         query += " ORDER BY o.code";
         return entityManager.createQuery(query).getResultList();
     }
@@ -291,7 +298,9 @@ public class DisciplineScientifiqueChercheurServiceImpl extends AbstractServiceI
         List<DisciplineScientifique> result = new ArrayList();
         User currentUser = SecurityUtil.getCurrentUser();
         if (currentUser != null && StringUtil.isNotEmpty(currentUser.getUsername())) {
-            String query = "SELECT o FROM DisciplineScientifique o  WHERE o.archive != true AND o.visible = false AND o.username = '" + currentUser.getUsername() + "'";
+            // l'Attribut Visible & username does not exist on Discipline Scientifique
+//            String query = "SELECT o FROM DisciplineScientifique o  WHERE o.archive != true AND o.visible = false AND o.username = '" + currentUser.getUsername() + "'";
+            String query = "SELECT o FROM DisciplineScientifique o  WHERE o.archive != true";
             query += " ORDER BY o.code";
             result = entityManager.createQuery(query).getResultList();
         }

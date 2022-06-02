@@ -17,6 +17,8 @@ public class DisciplineScientifiqueVo {
     private String dateArchivage ;
     private String dateCreation ;
 
+    private String disciplineScientifiqueErcLibelle ;
+
 
             private String niveauMax ;
             private String niveauMin ;
@@ -148,8 +150,15 @@ public class DisciplineScientifiqueVo {
         this.disciplineScientifiqueParentVo = disciplineScientifiqueParentVo;
         }
 
+    public String getDisciplineScientifiqueErcLibelle() {
+        return disciplineScientifiqueErcLibelle;
+    }
 
-        public List<DisciplineScientifiqueErcAssociationVo> getDisciplineScientifiqueErcAssociationsVo(){
+    public void setDisciplineScientifiqueErcLibelle(String disciplineScientifiqueErcLibelle) {
+        this.disciplineScientifiqueErcLibelle = disciplineScientifiqueErcLibelle;
+    }
+
+    public List<DisciplineScientifiqueErcAssociationVo> getDisciplineScientifiqueErcAssociationsVo(){
         return this.disciplineScientifiqueErcAssociationsVo;
         }
 

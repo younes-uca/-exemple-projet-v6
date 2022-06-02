@@ -14,6 +14,7 @@ export class DisciplineScientifiqueVo {
     public archive: null | boolean;
     public dateArchivage: Date;
     public dateCreation: Date;
+    public disciplineScientifiqueErcLibelle: string;
                 public niveauMax: string ;
                 public niveauMin: string ;
                 public dateArchivageMax: string ;

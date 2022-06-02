@@ -26,14 +26,14 @@ public class DisciplineScientifiqueErcAssociationChercheurServiceImpl extends Ab
     public String generateGlobalLibellFordisciplineScientifique(Long id) {
         StringBuilder concat = new StringBuilder();
         DisciplineScientifique disciplineScientifique = disciplineScientifiqueService.findById(id);
-        concat.append(disciplineScientifique.getLibelleEng() + "(");
+        concat.append(disciplineScientifique.getLibelleEng()).append("(");
         List<DisciplineScientifiqueErcAssociation> disciplineScientifiqueErcAssociationList = findByDisciplineScientifiqueId(id);
-        disciplineScientifiqueErcAssociationList.forEach(e-> {
+        disciplineScientifiqueErcAssociationList.forEach(e -> {
             String str = keyWordDisciplineScientifiqueErcChercheurService.generateDisciplineScientifiqueErcLibelle(e.getDisciplineScientifiqueErc().getId());
-            if(!concat.toString().contains(str))
-            concat.append(str+",");
+            if (!concat.toString().contains(str))
+                concat.append(str).append(",");
         });
-        String result = concat.substring(0,concat.length()-1) +")";
+        String result = concat.substring(0, concat.length() - 1) + ")";
         return result;
     }
 

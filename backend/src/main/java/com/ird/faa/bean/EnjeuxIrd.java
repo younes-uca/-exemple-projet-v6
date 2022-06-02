@@ -30,10 +30,10 @@ private Long id;
             @Column(columnDefinition = "boolean default false")
                  private Boolean archive = false;
             @JsonFormat(pattern="yyyy-MM-dd")
-            @Temporal(TemporalType.DATE)
+            @Temporal(TemporalType.TIMESTAMP)
             private Date dateArchivage ;
             @JsonFormat(pattern="yyyy-MM-dd")
-            @Temporal(TemporalType.DATE)
+            @Temporal(TemporalType.TIMESTAMP)
             private Date dateCreation ;
 
 

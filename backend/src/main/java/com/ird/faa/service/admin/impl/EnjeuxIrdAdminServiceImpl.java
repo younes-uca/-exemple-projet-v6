@@ -113,7 +113,8 @@ public EnjeuxIrd update(EnjeuxIrd enjeuxIrd){
 EnjeuxIrd foundedEnjeuxIrd = findById(enjeuxIrd.getId());
 if(foundedEnjeuxIrd==null) return null;
 else{
-    archivableService.prepare(enjeuxIrd);
+//    archivableService.prepare(enjeuxIrd);
+    enjeuxIrd.setDateArchivage(enjeuxIrd.getDateArchivage());
 return  enjeuxIrdDao.save(enjeuxIrd);
 }
 }

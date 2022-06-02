@@ -44,6 +44,9 @@ DisciplineScientifique item = new DisciplineScientifique();
         item.setDateArchivage(DateUtil.parse(vo.getDateArchivage()));
         if(StringUtil.isNotEmpty(vo.getDateCreation()))
         item.setDateCreation(DateUtil.parse(vo.getDateCreation()));
+
+        if(StringUtil.isNotEmpty(vo.getDisciplineScientifiqueErcLibelle()))
+        item.setDisciplineScientifiqueErcLibelle(vo.getDisciplineScientifiqueErcLibelle());
     if(vo.getDisciplineScientifiqueParentVo()!=null && this.disciplineScientifiqueParent)
         item.setDisciplineScientifiqueParent(disciplineScientifiqueParentConverter.toItem(vo.getDisciplineScientifiqueParentVo())) ;
 
@@ -65,6 +68,12 @@ DisciplineScientifiqueVo vo = new DisciplineScientifiqueVo();
 
         if(StringUtil.isNotEmpty(item.getLibelleFr()))
         vo.setLibelleFr(item.getLibelleFr());
+
+
+        if(StringUtil.isNotEmpty(item.getDisciplineScientifiqueErcLibelle()))
+        vo.setDisciplineScientifiqueErcLibelle(item.getDisciplineScientifiqueErcLibelle());
+
+
 
         if(StringUtil.isNotEmpty(item.getLibelleEng()))
         vo.setLibelleEng(item.getLibelleEng());

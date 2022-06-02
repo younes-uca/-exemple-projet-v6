@@ -55,7 +55,9 @@
                                             <label for="5">Date archivage</label>
                                             <p-calendar id="5"
                                                         placeholder="Date archivage"  [(ngModel)]="selectedEnjeuxIrd.dateArchivage"
-                                                    dateFormat="{{dateFormat}}"  >
+                                                        dateFormat="{{dateFormat}}"
+                                                        [showTime]="true" [showSeconds]="true"
+                                            >
                                             </p-calendar>
                                             
                                         </div>

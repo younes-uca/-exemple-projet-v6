@@ -21,21 +21,29 @@ import com.ird.faa.bean.EtatEtapeCampagne;
 
 @SpringBootApplication
 public class FaaApplication {
-public static ConfigurableApplicationContext ctx;
+        public static ConfigurableApplicationContext ctx;
 
-public static void main(String[] args) {
-ctx=SpringApplication.run(FaaApplication.class, args);
-}
+        public static void main(String[] args) {
+                ctx = SpringApplication.run(FaaApplication.class, args);
+        }
 
-public static ConfigurableApplicationContext getCtx() {
-return ctx;
-}
+        public static ConfigurableApplicationContext getCtx() {
+                return ctx;
+        }
 
-@Bean
-public CommandLineRunner demo(UserService userService, RoleService roleService
-, EtatEtapeCampagneAdminService etatEtapeCampagneAdminService) {
-return (args) -> {
-if(false){
+        @Bean
+        public CommandLineRunner demo(EtatEtapeCampagneAdminService etapeCampagneAdminService) {
+                return (args) -> {
+                        if (true) {
+                                int i=100;
+                                for (int i1 = 0; i1 < i; i1++) {
+
+                                        EtatEtapeCampagne etatEtapeCampagne1 = new EtatEtapeCampagne(UUID.randomUUID().toString(),UUID.randomUUID().toString(),i1);
+                                        etapeCampagneAdminService.save(etatEtapeCampagne1);
+                                }
+
+                        }
+   /*
     Map<String,String> etats=new HashMap<>();
     etats.put("Initialisé","initialise");
     etats.put("En cours","encours");
@@ -262,7 +270,11 @@ if(false){
                 permissions.add(new Permission("KeyWordDisciplineScientifiqueErc.delete"));
             }
 
+*/
 
-            }
+
+                };
+        }
+}
 
 

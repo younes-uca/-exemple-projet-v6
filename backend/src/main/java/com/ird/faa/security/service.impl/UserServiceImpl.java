@@ -1,32 +1,26 @@
 package com.ird.faa.security.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-
 import com.ird.faa.bean.Chercheur;
+import com.ird.faa.security.bean.Role;
+import com.ird.faa.security.bean.User;
+import com.ird.faa.security.dao.UserDao;
+import com.ird.faa.security.service.facade.RoleService;
+import com.ird.faa.security.service.facade.UserService;
 import com.ird.faa.service.admin.facade.ChercheurAdminService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import  com.ird.faa.security.bean.Role;
-import com.ird.faa.security.bean.User;
-import com.ird.faa.security.dao.UserDao;
-
-import com.ird.faa.security.service.facade.RoleService;
-import com.ird.faa.security.service.facade.UserService;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-
 
     @Autowired
     private ChercheurAdminService chercheurAdminService;
@@ -68,8 +62,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long id) {
         if (id == null)
-        return null;
-        return userDao.getOne(id);
+            return null;
+        else
+            return userDao.getOne(id);
     }
 
     @Transactional
@@ -79,39 +74,38 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-    User foundedUserByUsername = findByUsername(user.getUsername());
-    User foundedUserByEmail = userDao.findByEmail(user.getEmail());
-    if (foundedUserByUsername != null || foundedUserByEmail != null) return null;
-    else {
-    if (user.getPassword() == null || user.getPassword().isEmpty()) {
-    user.setPassword(bCryptPasswordEncoder.encode(user.getUsername()));
-    }
-    else {
-    user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-    }
-    user.setAccountNonExpired(true);
-    user.setAccountNonLocked(true);
-    user.setCredentialsNonExpired(true);
-    user.setEnabled(true);
-    user.setPasswordChanged(false);
-    user.setCreatedAt(new Date());
-
-    if (user.getRoles() != null) {
-    Collection<Role> roles = new ArrayList<Role>();
-            for (Role role : user.getRoles()) {
-            roles.add(roleService.save(role));
+        User foundedUserByUsername = findByUsername(user.getUsername());
+        User foundedUserByEmail = userDao.findByEmail(user.getEmail());
+        if (foundedUserByUsername != null || foundedUserByEmail != null) return null;
+        else {
+            if (user.getPassword() == null || user.getPassword().isEmpty()) {
+                user.setPassword(bCryptPasswordEncoder.encode(user.getUsername()));
+            } else {
+                user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             }
-            user.setRoles(roles);
+            user.setAccountNonExpired(true);
+            user.setAccountNonLocked(true);
+            user.setCredentialsNonExpired(true);
+            user.setEnabled(true);
+            user.setPasswordChanged(false);
+            user.setCreatedAt(new Date());
+
+            if (user.getRoles() != null) {
+                Collection<Role> roles = new ArrayList<Role>();
+                for (Role role : user.getRoles()) {
+                    roles.add(roleService.save(role));
+                }
+                user.setRoles(roles);
             }
             User mySaved = userDao.save(user);
             for (Role role : user.getRoles()) {
-            if (role.getAuthority().equals("ROLE_CHERCHEUR")) {
-            chercheurAdminService.save(transformToChercheur(user));
-            }
+                if (role.getAuthority().equals("ROLE_CHERCHEUR")) {
+                    chercheurAdminService.save(transformToChercheur(user));
+                }
             }
             return mySaved;
-            }
-            }
+        }
+    }
 
             private Chercheur transformToChercheur(User user) {
             Chercheur chercheur = new Chercheur();

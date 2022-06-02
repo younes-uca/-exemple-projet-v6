@@ -1,12 +1,11 @@
 package  com.ird.faa.ws.rest.provided.converter;
 
+import com.ird.faa.bean.DisciplineScientifiqueChercheur;
+import com.ird.faa.service.util.NumberUtil;
+import com.ird.faa.service.util.StringUtil;
+import com.ird.faa.ws.rest.provided.vo.DisciplineScientifiqueChercheurVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.ird.faa.service.util.*;
-
-
-import com.ird.faa.bean.DisciplineScientifiqueChercheur;
-import com.ird.faa.ws.rest.provided.vo.DisciplineScientifiqueChercheurVo;
 
 @Component
 public class DisciplineScientifiqueChercheurConverter extends AbstractConverter<DisciplineScientifiqueChercheur,DisciplineScientifiqueChercheurVo>{
@@ -25,25 +24,25 @@ public  DisciplineScientifiqueChercheurConverter(){
 init(true);
 }
 
-@Override
-public DisciplineScientifiqueChercheur toItem(DisciplineScientifiqueChercheurVo vo) {
-if (vo == null) {
-return null;
-} else {
-DisciplineScientifiqueChercheur item = new DisciplineScientifiqueChercheur();
-        if(StringUtil.isNotEmpty(vo.getId()))
-        item.setId(NumberUtil.toLong(vo.getId()));
-    if(vo.getDisciplineScientifiqueVo()!=null && this.disciplineScientifique)
-        item.setDisciplineScientifique(disciplineScientifiqueConverter.toItem(vo.getDisciplineScientifiqueVo())) ;
-    if(vo.getDisciplineScientifiqueErcVo()!=null && this.disciplineScientifiqueErc)
-        item.setDisciplineScientifiqueErc(disciplineScientifiqueErcConverter.toItem(vo.getDisciplineScientifiqueErcVo())) ;
-    if(vo.getChercheurVo()!=null && this.chercheur)
-        item.setChercheur(chercheurConverter.toItem(vo.getChercheurVo())) ;
+    @Override
+    public DisciplineScientifiqueChercheur toItem(DisciplineScientifiqueChercheurVo vo) {
+        if (vo == null) {
+            return null;
+        } else {
+            DisciplineScientifiqueChercheur item = new DisciplineScientifiqueChercheur();
+            if (StringUtil.isNotEmpty(vo.getId()))
+                item.setId(NumberUtil.toLong(vo.getId()));
+            if (vo.getDisciplineScientifiqueVo() != null && this.disciplineScientifique)
+                item.setDisciplineScientifique(disciplineScientifiqueConverter.toItem(vo.getDisciplineScientifiqueVo()));
+            if (vo.getDisciplineScientifiqueErcVo() != null && this.disciplineScientifiqueErc)
+                item.setDisciplineScientifiqueErc(disciplineScientifiqueErcConverter.toItem(vo.getDisciplineScientifiqueErcVo()));
+            if (vo.getChercheurVo() != null && this.chercheur)
+                item.setChercheur(chercheurConverter.toItem(vo.getChercheurVo()));
 
 
-return item;
-}
-}
+            return item;
+        }
+    }
 
 @Override
 public DisciplineScientifiqueChercheurVo toVo(DisciplineScientifiqueChercheur item) {

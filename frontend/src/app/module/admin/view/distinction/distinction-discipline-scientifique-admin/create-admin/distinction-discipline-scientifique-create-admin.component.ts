@@ -71,7 +71,7 @@ public save(){
 }
 
 public saveWithShowOption(showList: boolean){
-     this.distinctionDisciplineScientifiqueService.save().subscribe(distinctionDisciplineScientifique=>{
+     this.distinctionDisciplineScientifiqueService.save().subscribe(distinctionDisciplineScientifique   =>{
        this.distinctionDisciplineScientifiques.push({...distinctionDisciplineScientifique});
        this.createDistinctionDisciplineScientifiqueDialog = false;
        this.submitted = false;

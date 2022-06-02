@@ -1,30 +1,32 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { Role } from '../model/Role.model';
-import { User } from '../model/User.model';
-import { TokenService } from './Token.service';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
+import {Role} from '../model/Role.model';
+import {User} from '../model/User.model';
+import {TokenService} from './Token.service';
 import {environment} from '../../../environments/environment';
 import {ChercheurVo} from '../model/Chercheur.model';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
     readonly API = environment.loginUrl;
     public _user = new User();
     private _authenticatedUser = new User();
-    private _authenticated = <boolean>JSON.parse(localStorage.getItem('autenticated')) || false;
+    private _authenticated = <boolean> JSON.parse(localStorage.getItem('autenticated')) || false;
     public _loggedIn = new BehaviorSubject<boolean>(false);
     public loggedIn$ = this._loggedIn.asObservable();
     public error: string = null;
-    private  connectedChercheur = 'connectedChercheur';
+    private connectedChercheur = 'connectedChercheur';
 
 
-    constructor(private http: HttpClient, private tokenService: TokenService, private router: Router) { }
-         public loginAdmin(username: string, password: string) {
-       this.http.post<any>(this.API + 'login', { username, password }, { observe: 'response' }).subscribe(
+    constructor(private http: HttpClient, private tokenService: TokenService, private router: Router) {
+    }
+
+    public loginAdmin(username: string, password: string) {
+        this.http.post<any>(this.API + 'login', {username, password}, {observe: 'response'}).subscribe(
             resp => {
                 this.error = null;
                 const jwt = resp.headers.get('Authorization');
@@ -38,8 +40,9 @@ export class AuthService {
             }
         );
     }
-       public loginChercheur(username: string, password: string) {
-       this.http.post<any>(this.API + 'login', { username, password }, { observe: 'response' }).subscribe(
+
+    public loginChercheur(username: string, password: string) {
+        this.http.post<any>(this.API + 'login', {username, password}, {observe: 'response'}).subscribe(
             resp => {
                 this.error = null;
                 const jwt = resp.headers.get('Authorization');
@@ -54,7 +57,7 @@ export class AuthService {
         );
     }
 
-       public loadInfos() {
+    public loadInfos() {
         const tokenDecoded = this.tokenService.decode();
         const username = tokenDecoded.sub;
         const roles = tokenDecoded.roles;
@@ -74,31 +77,35 @@ export class AuthService {
 
     }
 
-     public hasRole(role:Role): boolean {
-       const index = this._authenticatedUser.roles.findIndex(r=>r.authority == role.authority);
-       return  index > -1 ? true : false;
+    public hasRole(role: Role): boolean {
+        const index = this._authenticatedUser.roles.findIndex(r => r.authority == role.authority);
+        return index > -1 ? true : false;
     }
-    lolo
+
+    lolo;
+
     public registerAdmin() {
         console.log(this.user);
         this.http.post<any>(this.API + 'api/users/save', this.user, {observe: 'response'}).subscribe(
             resp => {
                 this.router.navigate(['admin/login']);
             }, (error: HttpErrorResponse) => {
-               console.log(error.error);
+                console.log(error.error);
             }
         );
     }
+
     public registerChercheur() {
         console.log(this.user);
         this.http.post<any>(this.API + 'api/users/save', this.user, {observe: 'response'}).subscribe(
             resp => {
                 this.router.navigate(['chercheur/login']);
             }, (error: HttpErrorResponse) => {
-               console.log(error.error);
+                console.log(error.error);
             }
         );
     }
+
     public logout() {
         this.tokenService.removeToken();
         this.unregisterConnectedChercheur();
@@ -108,13 +115,15 @@ export class AuthService {
         this._authenticatedUser = new User();
         this.router.navigate(['']);
     }
-     get user(): User {
+
+    get user(): User {
         return this._user;
     }
 
     set user(value: User) {
         this._user = value;
     }
+
     get authenticated(): boolean {
         return this._authenticated;
     }
@@ -122,7 +131,8 @@ export class AuthService {
     set authenticated(value: boolean) {
         this._authenticated = value;
     }
-        get authenticatedUser(): User {
+
+    get authenticatedUser(): User {
         return this._authenticatedUser;
     }
 
@@ -132,16 +142,17 @@ export class AuthService {
 
 
     public authenticatedUserByAdmin(): ChercheurVo {
-    if (localStorage.getItem(this.connectedChercheur) !== null){
-    return JSON.parse(localStorage.getItem(this.connectedChercheur));
-    }
-    return null;
+        if (localStorage.getItem(this.connectedChercheur) !== null) {
+            return JSON.parse(localStorage.getItem(this.connectedChercheur));
+        }
+        return null;
     }
 
-    public registerConnectedChercheur(chercheur: ChercheurVo): void{
-    localStorage.setItem(this.connectedChercheur, JSON.stringify(chercheur));
+    public registerConnectedChercheur(chercheur: ChercheurVo): void {
+        localStorage.setItem(this.connectedChercheur, JSON.stringify(chercheur));
     }
-    public unregisterConnectedChercheur(): void{
-    localStorage.removeItem(this.connectedChercheur);
+
+    public unregisterConnectedChercheur(): void {
+        localStorage.removeItem(this.connectedChercheur);
     }
 }

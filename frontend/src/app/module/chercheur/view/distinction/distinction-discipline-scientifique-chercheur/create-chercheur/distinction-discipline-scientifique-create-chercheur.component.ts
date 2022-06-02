@@ -51,6 +51,7 @@ ngOnInit(): void {
     this.distinctionService.findAll().subscribe((data) => this.distinctions = data);
     this.selectedDisciplineScientifique = new DisciplineScientifiqueVo();
     this.disciplineScientifiqueService.findAll().subscribe((data) => this.disciplineScientifiques = data);
+    this.disciplineScientifiqueService.findAllLibelle().subscribe((data) => this.disciplineScientifiquesLibelles = data);
 }
 
 
@@ -140,6 +141,7 @@ set distinctionDisciplineScientifiques(value: Array<DistinctionDisciplineScienti
     set selectedDistinctionDisciplineScientifique(value: DistinctionDisciplineScientifiqueVo) {
         this.distinctionDisciplineScientifiqueService.selectedDistinctionDisciplineScientifique = value;
        }
+
 
    get createDistinctionDisciplineScientifiqueDialog(): boolean {
            return this.distinctionDisciplineScientifiqueService.createDistinctionDisciplineScientifiqueDialog;
@@ -235,5 +237,16 @@ set distinctionDisciplineScientifiques(value: Array<DistinctionDisciplineScienti
     set validDisciplineScientifiqueCode(value: boolean) {
     this._validDisciplineScientifiqueCode = value;
     }
+
+    /* New */
+
+    get disciplineScientifiquesLibelles(): Array<string> {
+        return this.disciplineScientifiqueService.disciplineScientifiquesLibelles;
+    }
+
+    set disciplineScientifiquesLibelles(value: Array<string>) {
+        this.disciplineScientifiqueService.disciplineScientifiquesLibelles = value;
+    }
+
 
 }

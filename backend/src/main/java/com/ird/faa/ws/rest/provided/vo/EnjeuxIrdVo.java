@@ -12,8 +12,8 @@ public class EnjeuxIrdVo {
     private String code ;
     private String description ;
     private Boolean archive ;
-    private String dateArchivage ;
-    private String dateCreation ;
+    private Date dateArchivage ;
+    private Date dateCreation ;
 
 
             private String dateArchivageMax ;
@@ -62,23 +62,24 @@ public class EnjeuxIrdVo {
         public void setArchive(Boolean archive){
         this.archive = archive;
         }
-        public String getDateArchivage(){
-        return this.dateArchivage;
-        }
 
-        public void setDateArchivage(String dateArchivage){
+    public Date getDateArchivage() {
+        return dateArchivage;
+    }
+
+    public void setDateArchivage(Date dateArchivage) {
         this.dateArchivage = dateArchivage;
-        }
-        public String getDateCreation(){
-        return this.dateCreation;
-        }
+    }
 
-        public void setDateCreation(String dateCreation){
+    public Date getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
-        }
+    }
 
-
-            public String getDateArchivageMax(){
+    public String getDateArchivageMax(){
             return this.dateArchivageMax;
             }
 

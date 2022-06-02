@@ -22,7 +22,6 @@ export class LoginChercheurComponent implements OnInit {
     const username = formValues.username;
     const passowrd = formValues.password;
     this.authService.loginChercheur(username,passowrd);
-
   }
     register(){
     this.router.navigate(['/chercheur/register']);

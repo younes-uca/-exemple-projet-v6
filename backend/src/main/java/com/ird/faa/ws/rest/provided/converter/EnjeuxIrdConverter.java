@@ -32,10 +32,10 @@ EnjeuxIrd item = new EnjeuxIrd();
         item.setDescription(vo.getDescription());
             if(vo.getArchive() != null)
             item.setArchive(vo.getArchive());
-        if(StringUtil.isNotEmpty(vo.getDateArchivage()))
-        item.setDateArchivage(DateUtil.parse(vo.getDateArchivage()));
-        if(StringUtil.isNotEmpty(vo.getDateCreation()))
-        item.setDateCreation(DateUtil.parse(vo.getDateCreation()));
+
+
+        item.setDateArchivage(vo.getDateArchivage());
+        item.setDateCreation(vo.getDateCreation());
 
 
 return item;
@@ -62,10 +62,9 @@ EnjeuxIrdVo vo = new EnjeuxIrdVo();
 
         if(item.getArchive()!=null)
         vo.setArchive(item.getArchive());
-        if(item.getDateArchivage()!=null)
-        vo.setDateArchivage(DateUtil.formateDate(item.getDateArchivage()));
-        if(item.getDateCreation()!=null)
-        vo.setDateCreation(DateUtil.formateDate(item.getDateCreation()));
+
+        vo.setDateArchivage(item.getDateArchivage());
+        vo.setDateCreation(item.getDateCreation());
 
 return vo;
 }
